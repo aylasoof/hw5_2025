@@ -1,3 +1,5 @@
+
+/* did keyframes after mobile view, 0 to 100 is the states of the animation. since it was zooming to be large, an ease animation had to be added to header img */
 @keyframes logo {
     0% {
         width: 25px;
@@ -9,18 +11,21 @@
     }
 }
 
+/* Sets the font and background of the entire page */
 body{
     font-family: 'Poppins', serif;
     background: #f1f1f1 url("images/concrete_seamless.png");
     background-color: #f1f1f1;
 }
 
+/* enabling display for header, using inspect element on browser to order items */
 header{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* added animation based on the keyframes, name is to match the keyframe to the animation */
 header img{
     display: flex;
     animation-name: logo;
@@ -28,28 +33,29 @@ header img{
     animation-timing-function: ease;
 }
 
-footer p{
-    color: #ffffff;
-}
-
+/* gave other text the color black as was a light grey and a color contrast issue */
 h1, h2, p{
     color: #000000;
 }
 
-li{
-    color: #000000;
+/* added last, the footer wasn't in instructions. black background plus other body, h1, p text is black causes footer to be unseen, had to change color to white as shown in screenshots */
+footer p{
+    color: #ffffff;
 }
 
+/* placement of nav was fron the flex in the header, but nav items had to be aligned */
 .nav_links{
     display: flex;
     flex-direction: column;
 }
 
+/* changing the color of the nav items when the link has been visited*/
 .nav_links a:visited{
     color: #0000ee;
 
 }
 
+/* styling the individual cards, limited width allows for flexible height based on content. column direction aligns the content within the cards */
 .card{
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
@@ -58,12 +64,14 @@ li{
     flex-direction: column;
 }
 
+/* arranging the display of the cards within the pricing section of the website */
 .pricing{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* only styles the headers WITHIN the cards, not accounting for the top header as well. removed margins from looking at inspect element to match the screenshot */
 .card > header{
     background: #288088;
     border: solid 2px #45adad;
@@ -73,70 +81,84 @@ li{
     margin: 0;
 }
 
+/* arranging the images in the gallery section, fixed width lets images stretch heightwise */
 .gallery img{
     border: solid 10px #50c7c7;
     margin: 10px;
     width: 300px;
 }
 
+/* editing not the images but the images and the borders with it in the section to match the screenshot */
 .gallery{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
+/* styling for if the website is in a minimum of 900px */
 @media screen and (min-width: 900px){
     header{
         flex-direction: row;
         justify-content: space-between;
     }
 
+    /* if i position just the header, the body will overlap the header. the body > header allows for the header to overlap and remain sticky above all other content on page when scrolling */
     body > header{
         position: sticky;
         top: 0;
     }
 
+    /* overrides the direction when viewed in less than 900px */
     .nav_links{
         flex-direction: row;
     }
 
+    /* overrides the layout of the cards in the pricing section from the other view */
     .pricing{
         flex-direction: row;
         justify-content: center;
     }
 
+    /* allows cards to not be larger than 275px */
     .card{
         max-width: 275px;
     }
 }
 
+/* adding another media gives more styling for an accessibility mode, so this disables animation for those who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
     header img {
         animation: none;
     }
 }
 
+/* adding another media for styling how the website looks when a user wants to print */
 @media print{
+    /* this print view styling is only for portrait mode printing */
     @page {
         size: portrait;
     }
 
+    /* overrides the original fonts on the website */
     body{
         font-family: Arial, Helvetica;
         background: none;
         background-color: #f1f1f1;
     }
 
+    /* making sure the nav layout is at full width, allowing for the stretch */
     nav {
         width: 100%;
     }
 
+    /* using inspect to help place the nav layout within the header of printed page */
     .nav_links {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
     }
 
+    /* aligns the cards in the pricing section, using inspect to help with visual layout */
     .pricing {
         align-items: flex-end;
         flex-direction: row;
@@ -144,15 +166,18 @@ li{
         margin-bottom: 50px;
     }
 
+    /* overrides card styling but for the print format */
     .card{
         border: solid 2px #45addd;
         flex-basis: 325px;
     }
 
+    /* .gallery hides the images within the class, but gallery h2 remained visible. displaying none for h2 removed all h2 from page, so checking html for id or class for gallery helps with removing display */
     #gallery, .gallery {
         display: none;
     }
 
+    /* adds the thumbs up content to the second list item within the cards. the after allows the thumbs up to be placed after the content on the second list item on the cards. 1em allows flexible size for thumbs up to match the content in cards at all times. definitely did have some trouble with this! */
     .card li:nth-child(2)::after{
         content: "👍";
         font-size: 1em;
